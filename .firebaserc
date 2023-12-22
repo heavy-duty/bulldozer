@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "bulldozer-a2b07"
+  },
+  "targets": {
+    "bulldozer-a2b07": {
+      "hosting": {
+        "bulldozer-client": [
+          "bulldozer-a2b07"
+        ]
+      }
+    }
+  }
+}

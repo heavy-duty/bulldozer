@@ -1,0 +1,20 @@
+{
+	"name": "heavy-duty-ui-progress-ping",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/heavy-duty/ui/progress-ping/src",
+	"prefix": "hd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/heavy-duty/ui/progress-ping"],
+			"options": {
+				"jestConfig": "libs/heavy-duty/ui/progress-ping/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

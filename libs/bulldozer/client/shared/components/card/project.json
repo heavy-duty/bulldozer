@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-shared-components-card",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/shared/components/card/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/shared/components/card"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/shared/components/card/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

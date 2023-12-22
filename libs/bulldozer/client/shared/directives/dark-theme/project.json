@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-shared-directives-dark-theme",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/shared/directives/dark-theme/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/shared/directives/dark-theme"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/shared/directives/dark-theme/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

@@ -1,0 +1,257 @@
+{
+  "name": "bulldozer-cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/bulldozer-cli/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/bulldozer-cli",
+        "webpackConfig": "apps/bulldozer-api/webpack.config.js",
+        "main": "apps/bulldozer-cli/src/main.ts",
+        "tsConfig": "apps/bulldozer-cli/tsconfig.app.json",
+        "assets": [
+          "apps/bulldozer-cli/src/assets"
+        ],
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "generatePackageJson": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/bulldozer-cli/src/environments/environment.ts",
+              "with": "apps/bulldozer-cli/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "bulldozer-cli:build"
+      }
+    },
+    "build-app": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js build-app {args.workspaceId} {args.applicationId}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "build-workspace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js build-workspace {args.workspaceId} {args.outDir}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "deploy-workspace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js deploy-workspace {args.workspaceId} {args.outDir}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "deploy-app": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js deploy-app {args.workspaceId} {args.applicationId}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "generate-instruction": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js generate-instruction {args.instructionId} {args.outFile} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "generate-application": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js generate-application {args.applicationId} {args.outDir} {args.programId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "generate-collection": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js generate-collection {args.collectionId} {args.outFile}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "generate-workspace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js generate-workspace {args.workspaceId} {args.outDir}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-workspace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "rm -rf dist/apps/bulldozer-cli/",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "ncc build apps/bulldozer-cli/src/main.ts --license licenses.txt --minify --out dist/apps/bulldozer-cli",
+            "forwardAllArgs": false
+          },
+          "node dist/apps/bulldozer-cli/index.js get-workspace {args.workspaceId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-application": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-application {args.applicationId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-collection": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-collection {args.collectionId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-collection-attribute": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-collection-attribute {args.collectionAttributeId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-instruction": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-instruction {args.instructionId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-instruction-argument": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-instruction-argument {args.instructionArgumentId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-instruction-account": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-instruction-account {args.instructionAccountId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "get-instruction-relation": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build bulldozer-cli",
+          "node dist/apps/bulldozer-cli/main.js get-instruction-relation {args.instructionRelationId} {args.plain}"
+        ],
+        "parallel": false,
+        "envFile": "apps/bulldozer-cli/.env"
+      }
+    },
+    "publish-npm": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf dist/apps/bulldozer-cli/",
+          "ncc build apps/bulldozer-cli/src/main.ts --license licenses.txt --minify --out dist/apps/bulldozer-cli",
+          "cp apps/bulldozer-cli/package.json dist/apps/bulldozer-cli",
+          "npm publish dist/apps/bulldozer-cli"
+        ],
+        "parallel": false,
+        "envFile": "apps/drill-cli/.env"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/bulldozer-cli"
+      ],
+      "options": {
+        "jestConfig": "apps/bulldozer-cli/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

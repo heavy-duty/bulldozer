@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-auth-data-access",
+	"$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/auth/data-access/src",
+	"prefix": "heavy-duty",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/auth/data-access"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/auth/data-access/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

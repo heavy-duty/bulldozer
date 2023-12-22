@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-instructions-pages-view-instruction-code-editor",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/instructions/pages/view-instruction-code-editor/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/instructions/pages/view-instruction-code-editor"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/instructions/pages/view-instruction-code-editor/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

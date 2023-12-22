@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-shared-directives-section-header",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/shared/directives/section-header/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/shared/directives/section-header"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/shared/directives/section-header/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

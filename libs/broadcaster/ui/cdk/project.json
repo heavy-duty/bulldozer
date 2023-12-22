@@ -1,0 +1,40 @@
+{
+  "name": "broadcaster-ui-cdk",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/broadcaster/ui/cdk/src",
+  "prefix": "hd",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/broadcaster/ui/cdk"
+      ],
+      "options": {
+        "project": "libs/broadcaster/ui/cdk/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/broadcaster/ui/cdk/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/broadcaster/ui/cdk/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/broadcaster/ui/cdk"
+      ],
+      "options": {
+        "jestConfig": "libs/broadcaster/ui/cdk/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

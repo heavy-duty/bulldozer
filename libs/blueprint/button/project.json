@@ -1,0 +1,41 @@
+{
+  "name": "blueprint-button",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/blueprint/button/src",
+  "prefix": "bp",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/blueprint/button"
+      ],
+      "options": {
+        "project": "libs/blueprint/button/ng-package.json",
+        "tailwindConfig": "libs/blueprint/button/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/blueprint/button/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/blueprint/button/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/blueprint/button"
+      ],
+      "options": {
+        "jestConfig": "libs/blueprint/button/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

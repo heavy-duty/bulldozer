@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-notifications-components-snack-bar",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/notifications/components/snack-bar/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/notifications/components/snack-bar"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/notifications/components/snack-bar/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

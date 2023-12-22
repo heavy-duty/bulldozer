@@ -1,0 +1,40 @@
+{
+  "name": "ngx-solana-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/ngx-solana/data-access/src",
+  "prefix": "hd",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-solana/data-access"
+      ],
+      "options": {
+        "project": "libs/ngx-solana/data-access/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ngx-solana/data-access/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ngx-solana/data-access/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/ngx-solana/data-access"
+      ],
+      "options": {
+        "jestConfig": "libs/ngx-solana/data-access/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

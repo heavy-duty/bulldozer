@@ -1,0 +1,15 @@
+[features]
+seeds = true
+
+[programs.localnet]
+bulldozer = "DDeAAFUAXqyji1H9dTfrUXP8hEvhVdVFg7JyBK5yJG9Y"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/bulldozer.devnet.json"
+
+[scripts]
+test = "ts-mocha -p ./tsconfig.json -t 1000000 tests/*.spec.ts --parallel"

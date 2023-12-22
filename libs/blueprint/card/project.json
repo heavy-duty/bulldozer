@@ -1,0 +1,41 @@
+{
+  "name": "blueprint-card",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/blueprint/card/src",
+  "prefix": "bp",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/blueprint/card"
+      ],
+      "options": {
+        "project": "libs/blueprint/card/ng-package.json",
+        "tailwindConfig": "libs/blueprint/card/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/blueprint/card/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/blueprint/card/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/blueprint/card"
+      ],
+      "options": {
+        "jestConfig": "libs/blueprint/card/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

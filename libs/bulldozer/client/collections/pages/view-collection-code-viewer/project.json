@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-collections-pages-view-collection-code-viewer",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/collections/pages/view-collection-code-viewer/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/collections/pages/view-collection-code-viewer"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/collections/pages/view-collection-code-viewer/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

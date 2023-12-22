@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-workspaces-modals-import-workspace",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/workspaces/modals/import-workspace/src",
+	"prefix": "heavy-duty",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/workspaces/modals/import-workspace"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/workspaces/modals/import-workspace/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

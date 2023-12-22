@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-users-pages-view-user-info",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/users/pages/view-user-info/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/users/pages/view-user-info"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/users/pages/view-user-info/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

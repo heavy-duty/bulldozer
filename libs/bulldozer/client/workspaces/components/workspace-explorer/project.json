@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-workspaces-components-workspace-explorer",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/workspaces/components/workspace-explorer/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/workspaces/components/workspace-explorer"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/workspaces/components/workspace-explorer/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

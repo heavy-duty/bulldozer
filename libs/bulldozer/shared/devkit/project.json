@@ -1,0 +1,36 @@
+{
+	"name": "bulldozer-shared-devkit",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/bulldozer/shared/devkit/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/bulldozer/shared/devkit",
+				"main": "libs/bulldozer/shared/devkit/src/index.ts",
+				"tsConfig": "libs/bulldozer/shared/devkit/tsconfig.lib.json",
+				"assets": ["libs/bulldozer/shared/devkit/*.md"]
+			},
+			"dependsOn": [
+				{
+					"target": "build",
+					"dependencies": true
+				}
+			]
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/bulldozer/shared/devkit"],
+			"options": {
+				"jestConfig": "libs/bulldozer/shared/devkit/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}

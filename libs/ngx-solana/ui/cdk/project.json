@@ -1,0 +1,40 @@
+{
+  "name": "ngx-solana-ui-cdk",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/ngx-solana/ui/cdk/src",
+  "prefix": "hd",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/ngx-solana/ui/cdk"
+      ],
+      "options": {
+        "project": "libs/ngx-solana/ui/cdk/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ngx-solana/ui/cdk/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ngx-solana/ui/cdk/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/ngx-solana/ui/cdk"
+      ],
+      "options": {
+        "jestConfig": "libs/ngx-solana/ui/cdk/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

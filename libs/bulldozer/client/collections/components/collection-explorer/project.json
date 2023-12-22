@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-collections-components-collection-explorer",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/collections/components/collection-explorer/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/collections/components/collection-explorer"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/collections/components/collection-explorer/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

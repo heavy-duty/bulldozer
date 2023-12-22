@@ -1,0 +1,30 @@
+{
+	"name": "ngx-websocket",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ngx-websocket/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/ngx-websocket",
+				"main": "libs/ngx-websocket/src/index.ts",
+				"tsConfig": "libs/ngx-websocket/tsconfig.lib.json",
+				"assets": ["libs/ngx-websocket/*.md"]
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/ngx-websocket"],
+			"options": {
+				"jestConfig": "libs/ngx-websocket/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}

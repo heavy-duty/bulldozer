@@ -1,0 +1,22 @@
+{
+	"name": "bulldozer-client-instructions-modals-edit-instruction-token",
+	"$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/bulldozer/client/instructions/modals/edit-instruction-token/src",
+	"prefix": "bd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/bulldozer/client/instructions/modals/edit-instruction-token"
+			],
+			"options": {
+				"jestConfig": "libs/bulldozer/client/instructions/modals/edit-instruction-token/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

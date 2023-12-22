@@ -1,0 +1,30 @@
+{
+	"name": "rx-solana",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/rx-solana/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/shared//rx-solana",
+				"main": "libs/rx-solana/src/index.ts",
+				"tsConfig": "libs/rx-solana/tsconfig.lib.json",
+				"assets": ["libs/rx-solana/*.md"]
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/rx-solana"],
+			"options": {
+				"jestConfig": "libs/rx-solana/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}

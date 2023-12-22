@@ -1,0 +1,22 @@
+{
+	"name": "heavy-duty-ui-progress-spinner",
+	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "library",
+	"sourceRoot": "libs/heavy-duty/ui/progress-spinner/src",
+	"prefix": "hd",
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/libs/heavy-duty/ui/progress-spinner"
+			],
+			"options": {
+				"jestConfig": "libs/heavy-duty/ui/progress-spinner/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	},
+	"tags": []
+}

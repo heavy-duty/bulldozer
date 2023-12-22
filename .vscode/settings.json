@@ -1,0 +1,24 @@
+{
+	"conventionalCommits.scopes": [
+		"core",
+		"editor",
+		"wallet-adapter",
+		"ngx-solana",
+		"ngx-websocket",
+		"broadcaster",
+		"drill",
+		"bulldozer",
+		"blueprint",
+		"crane"
+	],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "explicit"
+	},
+	"[rust]": {
+		"editor.defaultFormatter": "rust-lang.rust"
+	},
+	"editor.tabSize": 2,
+	"cSpell.words": ["sidenav"]
+}

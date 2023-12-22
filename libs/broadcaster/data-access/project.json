@@ -1,0 +1,40 @@
+{
+  "name": "broadcaster-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/broadcaster/data-access/src",
+  "prefix": "hd",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/broadcaster/data-access"
+      ],
+      "options": {
+        "project": "libs/broadcaster/data-access/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/broadcaster/data-access/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/broadcaster/data-access/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/broadcaster/data-access"
+      ],
+      "options": {
+        "jestConfig": "libs/broadcaster/data-access/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}
