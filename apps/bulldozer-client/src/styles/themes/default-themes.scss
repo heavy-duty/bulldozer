@@ -3,24 +3,42 @@
 // Fonts
 $app-font: '"Space Grotesk"';
 
-$fontConfig: (
-	display-4:
-		mat.define-typography-level(112px, 112px, 300, $app-font, -0.0134em),
-	display-3: mat.define-typography-level(56px, 56px, 400, $app-font, -0.0089em),
-	display-2: mat.define-typography-level(45px, 48px, 400, $app-font, 0em),
-	display-1: mat.define-typography-level(34px, 40px, 400, $app-font, 0.0074em),
-	headline: mat.define-typography-level(24px, 32px, 400, $app-font, 0em),
-	title: mat.define-typography-level(20px, 32px, 500, $app-font, 0.0075em),
-	subheading-2:
-		mat.define-typography-level(16px, 28px, 400, $app-font, 0.0094em),
-	subheading-1:
-		mat.define-typography-level(15px, 24px, 500, $app-font, 0.0067em),
-	body-2: mat.define-typography-level(14px, 24px, 500, $app-font, 0.0179em),
-	body-1: mat.define-typography-level(14px, 20px, 400, $app-font, 0.0179em),
-	button: mat.define-typography-level(14px, 14px, 500, $app-font, 0.0893em),
-	caption: mat.define-typography-level(12px, 20px, 400, $app-font, 0.0333em),
-	input: mat.define-typography-level(inherit, 1.125, 400, $app-font, 1.5px),
-);
+// old format
+// $my-custom-typography-config: (
+// 	display-4:
+// 		mat.define-typography-level(112px, 112px, 300, $app-font, -0.0134em),
+// 	display-3: mat.define-typography-level(56px, 56px, 400, $app-font, -0.0089em),
+// 	display-2: mat.define-typography-level(45px, 48px, 400, $app-font, 0em),
+// 	display-1: mat.define-typography-level(34px, 40px, 400, $app-font, 0.0074em),
+// 	headline: mat.define-typography-level(24px, 32px, 400, $app-font, 0em),
+// 	title: mat.define-typography-level(20px, 32px, 500, $app-font, 0.0075em),
+// 	subheading-2:
+// 		mat.define-typography-level(16px, 28px, 400, $app-font, 0.0094em),
+// 	subheading-1:
+// 		mat.define-typography-level(15px, 24px, 500, $app-font, 0.0067em),
+// 	body-2: mat.define-typography-level(14px, 24px, 500, $app-font, 0.0179em),
+// 	body-1: mat.define-typography-level(14px, 20px, 400, $app-font, 0.0179em),
+// 	button: mat.define-typography-level(14px, 14px, 500, $app-font, 0.0893em),
+// 	caption: mat.define-typography-level(12px, 20px, 400, $app-font, 0.0333em),
+// 	input: mat.define-typography-level(inherit, 1.125, 400, $app-font, 1.5px),
+// );
+
+// $my-custom-typography-config: (
+// 	headline-1:
+// 		mat.define-typography-level(112px, 112px, 300, $app-font, -0.0134em),
+// 	headline-2: mat.define-typography-level(56px, 56px, 400, $app-font, -0.0089em),
+// 	headline-3: mat.define-typography-level(45px, 48px, 400, $app-font, 0em),
+// 	headline-4: mat.define-typography-level(34px, 40px, 400, $app-font, 0.0074em),
+// 	headline-5: mat.define-typography-level(24px, 32px, 400, $app-font, 0em),
+// 	headline-6: mat.define-typography-level(20px, 32px, 500, $app-font, 0.0075em),
+// 	subtitle-1: mat.define-typography-level(16px, 28px, 400, $app-font, 0.0094em),
+// 	subtitle-2: mat.define-typography-level(15px, 24px, 500, $app-font, 0.0067em),
+// 	body-2: mat.define-typography-level(14px, 24px, 500, $app-font, 0.0179em),
+// 	body-1: mat.define-typography-level(14px, 20px, 400, $app-font, 0.0179em),
+// 	button: mat.define-typography-level(14px, 14px, 500, $app-font, 0.0893em),
+// 	caption: mat.define-typography-level(12px, 20px, 400, $app-font, 0.0333em),
+// 	overline: mat.define-typography-level(inherit, 1.125, 400, $app-font, 1.5px),
+// );
 
 // Foreground Elements
 
@@ -138,7 +156,7 @@ $mat-dark-theme-background: (
 
 // Compute font config
 @include mat.core();
-//@include mat.core($fontConfig);
+//@include mat.core($my-custom-typography-config);
 
 // Theme Config
 
@@ -211,24 +229,24 @@ $mat-warn: (
 );
 $theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
 
-// @function set-light-theme($primary, $accent, $warn) {
-// 	@return (
-// 		primary: $primary,
-// 		accent: $accent,
-// 		warn: $warn,
-// 		is-dark: false,
-// 		foreground: $mat-light-theme-foreground,
-// 		background: $mat-light-theme-background
-// 	);
-// }
+@function set-light-theme($primary, $accent, $warn) {
+	@return (
+		primary: $primary,
+		accent: $accent,
+		warn: $warn,
+		is-dark: false,
+		foreground: $mat-light-theme-foreground,
+		background: $mat-light-theme-background
+	);
+}
 
-// @function set-dark-theme($primary, $accent, $warn) {
-// 	@return (
-// 		primary: $primary,
-// 		accent: $accent,
-// 		warn: $warn,
-// 		is-dark: false,
-// 		foreground: $mat-dark-theme-foreground,
-// 		background: $mat-dark-theme-background
-// 	);
-// }
+@function set-dark-theme($primary, $accent, $warn) {
+	@return (
+		primary: $primary,
+		accent: $accent,
+		warn: $warn,
+		is-dark: false,
+		foreground: $mat-dark-theme-foreground,
+		background: $mat-dark-theme-background
+	);
+}

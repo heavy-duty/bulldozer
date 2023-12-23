@@ -4,22 +4,53 @@
 @import './themes/default-themes.scss';
 @import './core/fonts.scss';
 
-//@include mat.core($fontConfig);
 @include mat.core();
 
-$dark-theme: mat.define-dark-theme(
+$my-custom-typography-config: mat.define-typography-config(
+	$font-family: 'Space Grotesk',
+	$headline-1:
+		mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+	$headline-2:
+		mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.0089em),
+	$headline-3:
+		mat.define-typography-level(45px, 48px, 400, $letter-spacing: 0em),
+	$headline-4:
+		mat.define-typography-level(34px, 40px, 400, $letter-spacing: 0.0074em),
+	$headline-5:
+		mat.define-typography-level(24px, 32px, 400, $letter-spacing: -0em),
+	$headline-6:
+		mat.define-typography-level(20px, 32px, 500, $letter-spacing: 0.0075em),
+	$subtitle-1:
+		mat.define-typography-level(16px, 28px, 400, $letter-spacing: 0.0094em),
+	$subtitle-2:
+		mat.define-typography-level(15px, 24px, 500, $letter-spacing: 0.0067em),
+	$body-1:
+		mat.define-typography-level(14px, 24px, 500, $letter-spacing: 0.0179em),
+	$body-2:
+		mat.define-typography-level(14px, 20px, 400, $letter-spacing: 0.0179em),
+	$button:
+		mat.define-typography-level(14px, 14px, 500, $letter-spacing: 0.0893em),
+	$caption:
+		mat.define-typography-level(12px, 20px, 400, $letter-spacing: 0.0333em),
+	$overline:
+		mat.define-typography-level(inherit, 1.125, 400, $letter-spacing: 1.5px),
+);
+
+$normal-theme: mat.define-dark-theme(
 	(
 		color: (
 			primary: $theme-primary,
 			accent: $theme-accent,
 			warn: $theme-warn,
 		),
+		typography: $my-custom-typography-config,
 	)
 );
 
 // Theme Init
-//@include angular-material-theme($dark-theme);
-@include mat.all-component-colors($dark-theme);
+@include mat.all-component-themes($normal-theme);
+@include mat.all-component-typographies($normal-theme);
+
 // end
 
 .hd-border-gray {
@@ -162,13 +193,20 @@ mat-icon {
 	background-color: rgba(30, 30, 30, 0.7);
 }
 
-.mat-snack-bar-container {
+.mat-mdc-snack-bar-container {
 	display: flex !important;
 	justify-content: center !important;
 	margin: 0 !important;
 	padding: 0 !important;
-	background-color: transparent !important;
 	box-shadow: none !important;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+	background-color: transparent !important;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+	color: white !important;
 }
 
 .mat-tab-link-container {
@@ -189,4 +227,8 @@ mat-icon {
 .mat-expansion-panel {
 	background-color: transparent !important;
 	box-shadow: none !important;
+}
+
+.mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
+	flex-grow: 0 !important;
 }
