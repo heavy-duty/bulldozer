@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStore } from '@bulldozer-client/auth-data-access';
 import {
-	ConfigStore,
-	DarkThemeStore,
-	TabStore,
+  ConfigStore,
+  DarkThemeStore,
+  TabStore,
 } from '@bulldozer-client/core-data-access';
 import { NotificationStore } from '@bulldozer-client/notifications-data-access';
 import {
-	UserInstructionsStore2,
-	UserStore,
+  UserInstructionsStore2,
+  UserStore,
 } from '@bulldozer-client/users-data-access';
 import { HdSolanaConfigStore } from '@heavy-duty/ngx-solana';
 import { WalletStore } from '@heavy-duty/wallet-adapter';
@@ -17,8 +17,8 @@ import { ComponentStore } from '@ngrx/component-store';
 import { distinctUntilChanged, filter, pairwise, pipe, tap } from 'rxjs';
 
 @Component({
-	selector: 'bd-shell',
-	template: `
+  selector: 'bd-shell',
+  template: `
 		<div>
 			<mat-sidenav-container class="h-screen-layout w-full bg-transparent">
 				<mat-sidenav
@@ -96,7 +96,6 @@ import { distinctUntilChanged, filter, pairwise, pipe, tap } from 'rxjs';
 								let wallet = wallet;
 								let wallets = wallets;
 								let publicKey = publicKey;
-								let selectWallet = selectWallet
 							"
 							class="bottom-0 py-6 px-4 mb-8 bg-bp-metal-2 bg-black relative mat-elevation-z4"
 						>
@@ -110,7 +109,7 @@ import { distinctUntilChanged, filter, pairwise, pipe, tap } from 'rxjs';
 								>
 									<hd-wallet-icon
 										class="flex-shrink-0"
-										[wallet]="wallet"
+										[hdWallet]="wallet"
 									></hd-wallet-icon>
 
 									<span
@@ -269,62 +268,62 @@ import { distinctUntilChanged, filter, pairwise, pipe, tap } from 'rxjs';
 			</mat-sidenav-container>
 		</div>
 	`,
-	providers: [
-		AuthStore,
-		TabStore,
-		NotificationStore,
-		ConfigStore,
-		DarkThemeStore,
-		UserStore,
-		UserInstructionsStore2,
-	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    AuthStore,
+    TabStore,
+    NotificationStore,
+    ConfigStore,
+    DarkThemeStore,
+    UserStore,
+    UserInstructionsStore2,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent extends ComponentStore<object> {
-	readonly isHandset$ = this._configStore.isHandset$;
-	readonly connected$ = this._walletStore.connected$;
-	readonly walletPublicKey$ = this._walletStore.publicKey$;
-	readonly workspaceId$ = this._configStore.workspaceId$;
-	readonly tabs$ = this._tabStore.tabs$;
-	readonly selectedTab$ = this._tabStore.selected$;
+  readonly isHandset$ = this._configStore.isHandset$;
+  readonly connected$ = this._walletStore.connected$;
+  readonly walletPublicKey$ = this._walletStore.publicKey$;
+  readonly workspaceId$ = this._configStore.workspaceId$;
+  readonly tabs$ = this._tabStore.tabs$;
+  readonly selectedTab$ = this._tabStore.selected$;
 
-	constructor(
-		private readonly _walletStore: WalletStore,
-		private readonly _tabStore: TabStore,
-		private readonly _configStore: ConfigStore,
-		private readonly _notificationStore: NotificationStore,
-		private readonly _router: Router,
-		private readonly _hdSolanaConfigStore: HdSolanaConfigStore
-	) {
-		super();
+  constructor(
+    private readonly _walletStore: WalletStore,
+    private readonly _tabStore: TabStore,
+    private readonly _configStore: ConfigStore,
+    private readonly _notificationStore: NotificationStore,
+    private readonly _router: Router,
+    private readonly _hdSolanaConfigStore: HdSolanaConfigStore
+  ) {
+    super();
 
-		this._handleNetworkChanges(this._hdSolanaConfigStore.selectedNetwork$);
-		this._redirectUnauthorized(this._walletStore.connected$);
-		this._notificationStore.setError(this._walletStore.error$);
-	}
+    this._handleNetworkChanges(this._hdSolanaConfigStore.selectedNetwork$);
+    this._redirectUnauthorized(this._walletStore.connected$);
+    this._notificationStore.setError(this._walletStore.error$);
+  }
 
-	private readonly _redirectUnauthorized = this.effect<boolean>(
-		pipe(
-			filter((connected) => !connected),
-			tap(() =>
-				this._router.navigate(['/unauthorized-access'], {
-					queryParams: {
-						redirect: this._router.routerState.snapshot.url,
-					},
-				})
-			)
-		)
-	);
+  private readonly _redirectUnauthorized = this.effect<boolean>(
+    pipe(
+      filter((connected) => !connected),
+      tap(() =>
+        this._router.navigate(['/unauthorized-access'], {
+          queryParams: {
+            redirect: this._router.routerState.snapshot.url,
+          },
+        })
+      )
+    )
+  );
 
-	private readonly _handleNetworkChanges = this.effect(
-		pipe(
-			distinctUntilChanged(),
-			pairwise(),
-			tap(() => this._router.navigate(['/']))
-		)
-	);
+  private readonly _handleNetworkChanges = this.effect(
+    pipe(
+      distinctUntilChanged(),
+      pairwise(),
+      tap(() => this._router.navigate(['/']))
+    )
+  );
 
-	onCloseTab(tabId: string) {
-		this._tabStore.closeTab(tabId);
-	}
+  onCloseTab(tabId: string) {
+    this._tabStore.closeTab(tabId);
+  }
 }

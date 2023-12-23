@@ -1,29 +1,29 @@
 import { CommonModule } from '@angular/common';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	ContentChild,
-	ElementRef,
-	Input,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
 } from '@angular/core';
 import { BlueprintButtonComponent } from '@heavy-duty/blueprint-button';
 import { Wallet } from '@heavy-duty/wallet-adapter';
 import {
-	HdWalletAdapterDirective,
-	HdWalletConnectButtonDirective,
-	HdWalletIconComponent,
+  HdConnectWalletDirective,
+  HdWalletAdapterDirective,
+  HdWalletIconComponent,
 } from '@heavy-duty/wallet-adapter-cdk';
 
 @Component({
-	selector: 'hd-wallet-connect-button',
-	template: `
+  selector: 'hd-wallet-connect-button',
+  template: `
 		<button
 			*hdWalletAdapter="
 				let wallet = wallet;
 				let connecting = connecting;
 				let connected = connected
 			"
-			hdWalletConnectButton
+			hdConnectWallet
 			bpButton
 			class="w-full"
 			[disabled]="connecting || !wallet || connected || disabled"
@@ -32,14 +32,14 @@ import {
 			<div class="button-content" *ngIf="!children">
 				<hd-wallet-icon
 					*ngIf="wallet !== null"
-					[wallet]="wallet"
+					[hdWallet]="wallet"
 				></hd-wallet-icon>
 				{{ getMessage(connected, connecting, wallet) }}
 			</div>
 		</button>
 	`,
-	styles: [
-		`
+  styles: [
+    `
 			button {
 				display: inline-block;
 			}
@@ -50,25 +50,25 @@ import {
 				align-items: center;
 			}
 		`,
-	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
-	imports: [
-		CommonModule,
-		HdWalletAdapterDirective,
-		HdWalletIconComponent,
-		HdWalletConnectButtonDirective,
-		BlueprintButtonComponent,
-	],
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    HdWalletAdapterDirective,
+    HdWalletIconComponent,
+    HdConnectWalletDirective,
+    BlueprintButtonComponent,
+  ],
 })
 export class HdWalletConnectButtonComponent {
-	@ContentChild('children') children: ElementRef | null = null;
-	@Input() disabled = false;
+  @ContentChild('children') children: ElementRef | null = null;
+  @Input() disabled = false;
 
-	getMessage(connected: boolean, connecting: boolean, wallet: Wallet | null) {
-		if (connecting) return 'Connecting...';
-		if (connected) return 'Connected';
-		if (wallet) return 'Connect';
-		return 'Connect Wallet';
-	}
+  getMessage(connected: boolean, connecting: boolean, wallet: Wallet | null) {
+    if (connecting) return 'Connecting...';
+    if (connected) return 'Connected';
+    if (wallet) return 'Connect';
+    return 'Connect Wallet';
+  }
 }

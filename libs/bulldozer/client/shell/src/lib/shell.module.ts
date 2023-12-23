@@ -14,7 +14,7 @@ import { UserInstructionsModule } from '@bulldozer-client/user-instructions';
 import { WorkspaceExplorerModule } from '@bulldozer-client/workspace-explorer';
 import { HdSolanaCdkModule } from '@heavy-duty/ngx-solana-cdk';
 import { HdSolanaMaterialModule } from '@heavy-duty/ngx-solana-material';
-import { HdWalletAdapterBlueprintModule } from '@heavy-duty/wallet-adapter-blueprint';
+import { HdWalletDisconnectButtonComponent, HdWalletModalButtonComponent } from '@heavy-duty/wallet-adapter-blueprint';
 import { HdWalletAdapterCdkModule } from '@heavy-duty/wallet-adapter-cdk';
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { ShellComponent } from './shell.component';
@@ -82,7 +82,8 @@ import { ShellComponent } from './shell.component';
     MatSnackBarModule,
     LetDirective, PushPipe,
     HdWalletAdapterCdkModule,
-    HdWalletAdapterBlueprintModule,
+    HdWalletModalButtonComponent,
+    HdWalletDisconnectButtonComponent,
     HdSolanaMaterialModule,
     HdSolanaCdkModule,
     DarkThemeDirectiveModule,

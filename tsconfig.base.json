@@ -319,17 +319,8 @@
 			"@heavy-duty/ui/progress-spinner": [
 				"libs/heavy-duty/ui/progress-spinner/src/index.ts"
 			],
-			"@heavy-duty/wallet-adapter": [
-				"libs/wallet-adapter/data-access/src/index.ts"
-			],
 			"@heavy-duty/wallet-adapter-blueprint": [
 				"libs/wallet-adapter/ui/blueprint/src/index.ts"
-			],
-			"@heavy-duty/wallet-adapter-cdk": [
-				"libs/wallet-adapter/ui/cdk/src/index.ts"
-			],
-			"@heavy-duty/wallet-adapter-material": [
-				"libs/wallet-adapter/ui/material/src/index.ts"
 			]
 		}
 	},

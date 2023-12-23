@@ -8,7 +8,7 @@ bulldozer = "DDeAAFUAXqyji1H9dTfrUXP8hEvhVdVFg7JyBK5yJG9Y"
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "~/.config/solana/bulldozer.devnet.json"
 
 [scripts]

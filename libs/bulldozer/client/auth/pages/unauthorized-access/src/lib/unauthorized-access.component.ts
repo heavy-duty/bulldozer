@@ -82,7 +82,6 @@ import { Subject, filter, takeUntil, withLatestFrom } from 'rxjs';
 								let wallet = wallet;
 								let wallets = wallets;
 								let publicKey = publicKey;
-								let selectWallet = selectWallet
 							"
 							class="py-4 px-7 w-48 h-16 flex justify-center items-center m-auto bg-bp-metal-2 shadow relative"
 						>
