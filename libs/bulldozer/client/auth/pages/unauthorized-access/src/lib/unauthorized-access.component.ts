@@ -22,7 +22,7 @@ import { Subject, filter, takeUntil, withLatestFrom } from 'rxjs';
 					>
 						<figure>
 							<img
-								src="assets/images/logo.webp"
+								src="https://res.cloudinary.com/pwcaguerrero/image/upload/w_96/q_auto/f_auto/v1703351921/LOGO_outline_2_jmuijs.png"
 								alt="HeavyDuty logo"
 								width="128"
 								height="144"

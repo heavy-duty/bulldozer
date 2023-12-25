@@ -20,7 +20,7 @@ import { HomeStore } from './home.store';
       <header>
         <figure class="w-32 mx-auto">
           <img
-            src="assets/images/logo.webp"
+            src="https://res.cloudinary.com/pwcaguerrero/image/upload/w_128/q_auto/f_auto/v1703351921/LOGO_outline_2_jmuijs.png"
             alt="HeavyDuty logo"
             width="128"
             height="144"
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
     private readonly _userStore: UserStore,
     private readonly _hdBroadcasterSocketStore: HdBroadcasterSocketStore,
     private readonly _notificationStore: NotificationStore
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._homeStore.setAuthority(
