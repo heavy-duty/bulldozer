@@ -1,22 +1,22 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-	BudgetApiService,
-	BudgetStore,
+  BudgetApiService,
+  BudgetStore,
 } from '@bulldozer-client/budgets-data-access';
 import { NotificationStore } from '@bulldozer-client/notifications-data-access';
 import { HdBroadcasterSocketStore } from '@heavy-duty/broadcaster';
 import {
-	DepositToBudgetDto,
-	WithdrawFromBudgetDto,
+  DepositToBudgetDto,
+  WithdrawFromBudgetDto,
 } from '@heavy-duty/bulldozer-devkit';
 import { isNotNullOrUndefined } from '@heavy-duty/rxjs';
 import { distinctUntilChanged, map } from 'rxjs';
 import { ViewWorkspaceBudgetStore } from './view-workspace-budget.store';
 
 @Component({
-	selector: 'bd-workspace-details-explorer-budget',
-	template: `
+  selector: 'bd-workspace-details-explorer-budget',
+  template: `
 		<header class="mb-8">
 			<h1 class="text-4xl uppercase mb-1 bp-font">budget</h1>
 			<p class="text-sm font-thin mb-0">
@@ -35,7 +35,7 @@ import { ViewWorkspaceBudgetStore } from './view-workspace-budget.store';
 					>
 						<img
 							class="w-1/2"
-							src="assets/images/solana-logo.webp"
+							src="https://res.cloudinary.com/andresmgsl/image/upload/w_50/q_auto/f_auto/v1707085432/tag_hdb_logo_jbtgoe.png"
 							width="28"
 							height="24"
 							alt="Solana Logo"
@@ -93,98 +93,98 @@ import { ViewWorkspaceBudgetStore } from './view-workspace-budget.store';
 			</div>
 		</main>
 	`,
-	styles: [],
-	providers: [BudgetStore, ViewWorkspaceBudgetStore],
+  styles: [],
+  providers: [BudgetStore, ViewWorkspaceBudgetStore],
 })
 export class ViewWorkspaceBudgetComponent implements OnInit {
-	@HostBinding('class') class = 'block p-8 pt-5 h-full';
+  @HostBinding('class') class = 'block p-8 pt-5 h-full';
 
-	readonly workspaceId$ = this._route.paramMap.pipe(
-		map((paramMap) => paramMap.get('workspaceId')),
-		isNotNullOrUndefined,
-		distinctUntilChanged()
-	);
-	readonly budget$ = this._viewWorkspaceBudgetStore.budget$;
+  readonly workspaceId$ = this._route.paramMap.pipe(
+    map((paramMap) => paramMap.get('workspaceId')),
+    isNotNullOrUndefined,
+    distinctUntilChanged()
+  );
+  readonly budget$ = this._viewWorkspaceBudgetStore.budget$;
 
-	constructor(
-		private readonly _route: ActivatedRoute,
-		private readonly _hdBroadcasterSocketStore: HdBroadcasterSocketStore,
-		private readonly _notificationStore: NotificationStore,
-		private readonly _budgetApiService: BudgetApiService,
-		private readonly _viewWorkspaceBudgetStore: ViewWorkspaceBudgetStore
-	) {}
+  constructor(
+    private readonly _route: ActivatedRoute,
+    private readonly _hdBroadcasterSocketStore: HdBroadcasterSocketStore,
+    private readonly _notificationStore: NotificationStore,
+    private readonly _budgetApiService: BudgetApiService,
+    private readonly _viewWorkspaceBudgetStore: ViewWorkspaceBudgetStore
+  ) { }
 
-	ngOnInit() {
-		this._viewWorkspaceBudgetStore.setWorkspaceId(
-			this._route.paramMap.pipe(map((paramMap) => paramMap.get('workspaceId')))
-		);
-	}
+  ngOnInit() {
+    this._viewWorkspaceBudgetStore.setWorkspaceId(
+      this._route.paramMap.pipe(map((paramMap) => paramMap.get('workspaceId')))
+    );
+  }
 
-	onDepositToBudget(
-		authority: string,
-		workspaceId: string,
-		depositToBudgetDto: DepositToBudgetDto
-	) {
-		this._budgetApiService
-			.depositToBudget({
-				authority,
-				workspaceId,
-				depositToBudgetDto,
-			})
-			.subscribe({
-				next: ({ transactionSignature, transaction }) => {
-					this._notificationStore.setEvent('Deposit request sent');
-					this._hdBroadcasterSocketStore.send(
-						JSON.stringify({
-							event: 'transaction',
-							data: {
-								transactionSignature,
-								transaction,
-								topicNames: [
-									`authority:${authority}`,
-									`workspace:${workspaceId}:budgets`,
-								],
-							},
-						})
-					);
-				},
-				error: (error) => {
-					this._notificationStore.setError(error);
-				},
-			});
-	}
+  onDepositToBudget(
+    authority: string,
+    workspaceId: string,
+    depositToBudgetDto: DepositToBudgetDto
+  ) {
+    this._budgetApiService
+      .depositToBudget({
+        authority,
+        workspaceId,
+        depositToBudgetDto,
+      })
+      .subscribe({
+        next: ({ transactionSignature, transaction }) => {
+          this._notificationStore.setEvent('Deposit request sent');
+          this._hdBroadcasterSocketStore.send(
+            JSON.stringify({
+              event: 'transaction',
+              data: {
+                transactionSignature,
+                transaction,
+                topicNames: [
+                  `authority:${authority}`,
+                  `workspace:${workspaceId}:budgets`,
+                ],
+              },
+            })
+          );
+        },
+        error: (error) => {
+          this._notificationStore.setError(error);
+        },
+      });
+  }
 
-	onWithdrawFromBudget(
-		authority: string,
-		workspaceId: string,
-		withdrawFromBudgetDto: WithdrawFromBudgetDto
-	) {
-		this._budgetApiService
-			.withdrawFromBudget({
-				authority,
-				workspaceId,
-				withdrawFromBudgetDto,
-			})
-			.subscribe({
-				next: ({ transactionSignature, transaction }) => {
-					this._notificationStore.setEvent('Withdraw request sent');
-					this._hdBroadcasterSocketStore.send(
-						JSON.stringify({
-							event: 'transaction',
-							data: {
-								transactionSignature,
-								transaction,
-								topicNames: [
-									`authority:${authority}`,
-									`workspace:${workspaceId}:budgets`,
-								],
-							},
-						})
-					);
-				},
-				error: (error) => {
-					this._notificationStore.setError(error);
-				},
-			});
-	}
+  onWithdrawFromBudget(
+    authority: string,
+    workspaceId: string,
+    withdrawFromBudgetDto: WithdrawFromBudgetDto
+  ) {
+    this._budgetApiService
+      .withdrawFromBudget({
+        authority,
+        workspaceId,
+        withdrawFromBudgetDto,
+      })
+      .subscribe({
+        next: ({ transactionSignature, transaction }) => {
+          this._notificationStore.setEvent('Withdraw request sent');
+          this._hdBroadcasterSocketStore.send(
+            JSON.stringify({
+              event: 'transaction',
+              data: {
+                transactionSignature,
+                transaction,
+                topicNames: [
+                  `authority:${authority}`,
+                  `workspace:${workspaceId}:budgets`,
+                ],
+              },
+            })
+          );
+        },
+        error: (error) => {
+          this._notificationStore.setError(error);
+        },
+      });
+  }
 }

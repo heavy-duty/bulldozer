@@ -41,7 +41,7 @@ Remember to export this 2 env vars -> export PROGRAM_ID="\<program-id\>" && expo
 
 Those three commands will build the program, deploy it to your local validator instance and start a server at port 4200 with the client application.
 
-NOTE: Make sure to point the solana config in your local environment to match the local instance you have running.
+NOTE: Make sure to point the solana config in your local environment to match the local instance you have running.. Also, for deployment, remember to search and replace de API url, temporal it's fixed on the collection and instruction client library (http://localhost:3334)
 
 ## Testing it
 

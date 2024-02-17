@@ -19,8 +19,9 @@ import { HomeStore } from './home.store';
     <ng-container *ngrxLet="user$; let user">
       <header>
         <figure class="w-32 mx-auto">
+        
           <img
-            src="https://res.cloudinary.com/pwcaguerrero/image/upload/w_128/q_auto/f_auto/v1703351921/LOGO_outline_2_jmuijs.png"
+            src="https://res.cloudinary.com/andresmgsl/image/upload/w_128/q_auto/f_auto/v1703351921/LOGO_outline_2_jmuijs.png"
             alt="HeavyDuty logo"
             width="128"
             height="144"

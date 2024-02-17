@@ -1,22 +1,22 @@
 import {
-	ChangeDetectionStrategy,
-	Component,
-	Input,
-	OnInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
 } from '@angular/core';
 import { ApplicationApiService } from '@bulldozer-client/applications-data-access';
 import { ConfigStore } from '@bulldozer-client/core-data-access';
 import { NotificationStore } from '@bulldozer-client/notifications-data-access';
 import { UserApiService, UserStore } from '@bulldozer-client/users-data-access';
 import {
-	WorkspaceApiService,
-	WorkspaceStore,
+  WorkspaceApiService,
+  WorkspaceStore,
 } from '@bulldozer-client/workspaces-data-access';
 import { HdBroadcasterSocketStore } from '@heavy-duty/broadcaster';
 import {
-	ApplicationDto,
-	UserDto,
-	WorkspaceDto,
+  ApplicationDto,
+  UserDto,
+  WorkspaceDto,
 } from '@heavy-duty/bulldozer-devkit';
 import { isNotNullOrUndefined } from '@heavy-duty/rxjs';
 import { WalletStore } from '@heavy-duty/wallet-adapter';
@@ -27,8 +27,8 @@ import { WorkspaceExplorerUserStore } from './workspace-explorer-user.store';
 import { WorkspaceExplorerStore } from './workspace-explorer.store';
 
 @Component({
-	selector: 'bd-workspace-explorer',
-	template: `
+  selector: 'bd-workspace-explorer',
+  template: `
 		<ng-container *ngrxLet="workspace$; let workspace">
 			<div class="flex flex-col h-screen bg-bp-stone">
 				<div
@@ -175,7 +175,7 @@ import { WorkspaceExplorerStore } from './workspace-explorer.store';
 										<img
 											class="w-8/12"
 											alt=""
-											src="assets/images/logo.webp"
+											src="https://res.cloudinary.com/andresmgsl/image/upload/w_50/q_auto/f_auto/v1707085432/tag_hdb_logo_jbtgoe.png"
 											width="26"
 											height="34"
 										/>
@@ -204,156 +204,156 @@ import { WorkspaceExplorerStore } from './workspace-explorer.store';
 			</div>
 		</ng-container>
 	`,
-	styles: [],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-		WorkspaceExplorerUserStore,
-		WorkspaceExplorerStore,
-		UserStore,
-		WorkspaceStore,
-	],
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    WorkspaceExplorerUserStore,
+    WorkspaceExplorerStore,
+    UserStore,
+    WorkspaceStore,
+  ],
 })
 export class WorkspaceExplorerComponent implements OnInit {
-	@Input() set workspaceId(value: string | null) {
-		this._workspaceExplorerStore.setWorkspaceId(value);
-	}
+  @Input() set workspaceId(value: string | null) {
+    this._workspaceExplorerStore.setWorkspaceId(value);
+  }
 
-	readonly userId$ = this._userStore.userId$;
-	readonly user$ = this._workspaceExplorerUserStore.user$;
-	readonly workspace$ = this._workspaceExplorerStore.workspace$;
+  readonly userId$ = this._userStore.userId$;
+  readonly user$ = this._workspaceExplorerUserStore.user$;
+  readonly workspace$ = this._workspaceExplorerStore.workspace$;
 
-	constructor(
-		private readonly _walletStore: WalletStore,
-		private readonly _hdBroadcasterSocketStore: HdBroadcasterSocketStore,
-		private readonly _notificationStore: NotificationStore,
-		private readonly _userApiService: UserApiService,
-		private readonly _workspaceExplorerStore: WorkspaceExplorerStore,
-		private readonly _workspaceExplorerUserStore: WorkspaceExplorerUserStore,
-		private readonly _applicationApiService: ApplicationApiService,
-		private readonly _workspaceApiService: WorkspaceApiService,
-		private readonly _configStore: ConfigStore,
-		private readonly _userStore: UserStore,
-		private readonly _workspaceDownloaderService: WorkspaceDownloaderService
-	) {}
+  constructor(
+    private readonly _walletStore: WalletStore,
+    private readonly _hdBroadcasterSocketStore: HdBroadcasterSocketStore,
+    private readonly _notificationStore: NotificationStore,
+    private readonly _userApiService: UserApiService,
+    private readonly _workspaceExplorerStore: WorkspaceExplorerStore,
+    private readonly _workspaceExplorerUserStore: WorkspaceExplorerUserStore,
+    private readonly _applicationApiService: ApplicationApiService,
+    private readonly _workspaceApiService: WorkspaceApiService,
+    private readonly _configStore: ConfigStore,
+    private readonly _userStore: UserStore,
+    private readonly _workspaceDownloaderService: WorkspaceDownloaderService
+  ) { }
 
-	ngOnInit() {
-		this._workspaceExplorerUserStore.setAuthority(
-			this._walletStore.publicKey$.pipe(
-				isNotNullOrUndefined,
-				map((publicKey) => publicKey.toBase58())
-			)
-		);
-	}
+  ngOnInit() {
+    this._workspaceExplorerUserStore.setAuthority(
+      this._walletStore.publicKey$.pipe(
+        isNotNullOrUndefined,
+        map((publicKey) => publicKey.toBase58())
+      )
+    );
+  }
 
-	onCreateUser(authority: string, userId: string, userDto: UserDto) {
-		this._userApiService
-			.create({
-				authority,
-				userDto,
-			})
-			.subscribe({
-				next: ({ transactionSignature, transaction }) => {
-					this._notificationStore.setEvent('Create user request sent');
-					this._hdBroadcasterSocketStore.send(
-						JSON.stringify({
-							event: 'transaction',
-							data: {
-								transactionSignature,
-								transaction,
-								topicNames: [`authority:${authority}`, `user:${userId}`],
-							},
-						})
-					);
-				},
-				error: (error) => {
-					this._notificationStore.setError(error);
-				},
-			});
-	}
+  onCreateUser(authority: string, userId: string, userDto: UserDto) {
+    this._userApiService
+      .create({
+        authority,
+        userDto,
+      })
+      .subscribe({
+        next: ({ transactionSignature, transaction }) => {
+          this._notificationStore.setEvent('Create user request sent');
+          this._hdBroadcasterSocketStore.send(
+            JSON.stringify({
+              event: 'transaction',
+              data: {
+                transactionSignature,
+                transaction,
+                topicNames: [`authority:${authority}`, `user:${userId}`],
+              },
+            })
+          );
+        },
+        error: (error) => {
+          this._notificationStore.setError(error);
+        },
+      });
+  }
 
-	onDownloadWorkspace(workspaceId: string) {
-		this._workspaceDownloaderService.downloadWorkspace(workspaceId).subscribe({
-			error: (error) => {
-				this._notificationStore.setError(error);
-			},
-		});
-	}
+  onDownloadWorkspace(workspaceId: string) {
+    this._workspaceDownloaderService.downloadWorkspace(workspaceId).subscribe({
+      error: (error) => {
+        this._notificationStore.setError(error);
+      },
+    });
+  }
 
-	onCreateWorkspace(authority: string, workspaceDto: WorkspaceDto) {
-		const workspaceKeypair = Keypair.generate();
+  onCreateWorkspace(authority: string, workspaceDto: WorkspaceDto) {
+    const workspaceKeypair = Keypair.generate();
 
-		this._workspaceApiService
-			.create(workspaceKeypair, {
-				authority,
-				workspaceDto,
-			})
-			.subscribe({
-				next: ({ transactionSignature, transaction }) => {
-					this._notificationStore.setEvent('Create workspace request sent');
-					this._hdBroadcasterSocketStore.send(
-						JSON.stringify({
-							event: 'transaction',
-							data: {
-								transactionSignature,
-								transaction,
-								topicNames: [
-									`authority:${authority}`,
-									`workspace:${workspaceKeypair.publicKey.toBase58()}`,
-								],
-							},
-						})
-					);
-				},
-				error: (error) => {
-					this._notificationStore.setError(error);
-				},
-			});
-	}
+    this._workspaceApiService
+      .create(workspaceKeypair, {
+        authority,
+        workspaceDto,
+      })
+      .subscribe({
+        next: ({ transactionSignature, transaction }) => {
+          this._notificationStore.setEvent('Create workspace request sent');
+          this._hdBroadcasterSocketStore.send(
+            JSON.stringify({
+              event: 'transaction',
+              data: {
+                transactionSignature,
+                transaction,
+                topicNames: [
+                  `authority:${authority}`,
+                  `workspace:${workspaceKeypair.publicKey.toBase58()}`,
+                ],
+              },
+            })
+          );
+        },
+        error: (error) => {
+          this._notificationStore.setError(error);
+        },
+      });
+  }
 
-	onCreateApplication(
-		authority: string,
-		workspaceId: string,
-		applicationDto: ApplicationDto
-	) {
-		const applicationKeypair = Keypair.generate();
+  onCreateApplication(
+    authority: string,
+    workspaceId: string,
+    applicationDto: ApplicationDto
+  ) {
+    const applicationKeypair = Keypair.generate();
 
-		this._applicationApiService
-			.create(applicationKeypair, {
-				authority,
-				workspaceId,
-				applicationDto,
-			})
-			.subscribe({
-				next: ({ transactionSignature, transaction }) => {
-					this._notificationStore.setEvent('Create workspace request sent');
-					this._hdBroadcasterSocketStore.send(
-						JSON.stringify({
-							event: 'transaction',
-							data: {
-								transactionSignature,
-								transaction,
-								topicNames: [
-									`authority:${authority}`,
-									`workspaces:${workspaceId}:applications`,
-									`applications:${applicationKeypair.publicKey.toBase58()}`,
-								],
-							},
-						})
-					);
-				},
-				error: (error) => {
-					this._notificationStore.setError(error);
-				},
-			});
-	}
+    this._applicationApiService
+      .create(applicationKeypair, {
+        authority,
+        workspaceId,
+        applicationDto,
+      })
+      .subscribe({
+        next: ({ transactionSignature, transaction }) => {
+          this._notificationStore.setEvent('Create workspace request sent');
+          this._hdBroadcasterSocketStore.send(
+            JSON.stringify({
+              event: 'transaction',
+              data: {
+                transactionSignature,
+                transaction,
+                topicNames: [
+                  `authority:${authority}`,
+                  `workspaces:${workspaceId}:applications`,
+                  `applications:${applicationKeypair.publicKey.toBase58()}`,
+                ],
+              },
+            })
+          );
+        },
+        error: (error) => {
+          this._notificationStore.setError(error);
+        },
+      });
+  }
 
-	onImportWorkspace(workspaceId: string) {
-		this._workspaceApiService.findById(workspaceId).subscribe((workspace) => {
-			if (workspace === null) {
-				this._notificationStore.setError('Workspace does not exist.');
-			} else {
-				this._configStore.setWorkspaceId(workspaceId);
-			}
-		});
-	}
+  onImportWorkspace(workspaceId: string) {
+    this._workspaceApiService.findById(workspaceId).subscribe((workspace) => {
+      if (workspace === null) {
+        this._notificationStore.setError('Workspace does not exist.');
+      } else {
+        this._configStore.setWorkspaceId(workspaceId);
+      }
+    });
+  }
 }
